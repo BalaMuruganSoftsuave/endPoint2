@@ -1,8 +1,11 @@
 import 'dart:collection';
 import 'dart:convert';
 import 'dart:io';
+
+import 'package:endpoint2/modal/add_charter_modal.dart';
 import 'package:http/http.dart';
 import 'package:http/io_client.dart';
+
 import '../Modal/charter_list.dart';
 import '../Modal/login_response.dart';
 import 'api_constants.dart';
@@ -14,15 +17,15 @@ class APIHelper {
     var charterList;
     var body = {"charterer_name": chartererName};
     String url = hostUrl + getChartererList;
-    try{
-       charterList = await makeReq(url, body, method: Method.GET);
+    try {
+      charterList = await makeReq(url, body, method: Method.GET);
       print(charterList);
-       return CharterList.fromJson(charterList);
-    }catch(e){
+      return CharterList.fromJson(charterList);
+    } catch (e) {
       print((e as ApiFailure).message);
       return (e as ApiFailure).message;
-    };
-
+    }
+    ;
   }
 
   loginApi() async {
@@ -38,34 +41,23 @@ class APIHelper {
     return loginResponseData;
   }
 
-  addCharter(String name, String email, String address, String country,
-      String website, String contactPerson, String phoneNo,String state,String city) async {
-    var charterObj = {
-      "name": name,
-      "email": email,
-      "address1": address,
-      "address2": "",
-      "state": "",
-      "city": "",
-      "country": country,
-      "website": "$website",
-      "contactPerson": "XYZ",
-      "phoneNumber": phoneNo
-    };
+  addCharter(
+      AddCharter addCharter) async {
+    var charterObj = addCharter;
     var parentBody = {"chartererDetails": charterObj};
     String url = hostUrl + addCharterer;
     var addResponse;
-    try{
-       addResponse = await makeReq(url, parentBody, method: Method.POST);
-       print(addResponse);
+    try {
+      addResponse = await makeReq(url, parentBody, method: Method.POST);
+      print("object");
+      print(addResponse.toString());
+    } catch (e) {
+      addResponse = (e as ApiFailure).message.toString();
     }
-    catch(e){
-      addResponse=(e as ApiFailure).message.toString();
-    }
-
 
     return addResponse;
   }
+
   makeReq(String url, dynamic body, {Method method = Method.POST}) async {
     final httpClient = HttpClient();
     httpClient.badCertificateCallback =
@@ -133,7 +125,7 @@ class APIHelper {
         if (body != null && body.containsKey("errors")) {
           message = (body["errors"] as List)[0]["message"];
         }
-         throw ApiFailure(response.statusCode, message);
+        throw ApiFailure(response.statusCode, message);
       } else {
         var message = "";
         var body = jsonDecode(response.body) as LinkedHashMap?;

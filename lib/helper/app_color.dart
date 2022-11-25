@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/painting.dart';
 
-class AppColor{
+class AppColor {
   static Color appWhite = const Color(0xffFFFFFF);
   static Color appWhiteDark = const Color(0xffF4F4F4);
   static Color appBlack = const Color(0xff000000);
@@ -18,4 +18,5 @@ class AppColor{
   static Color checkGreen = const Color(0xff2AA952);
   static Color red1 = const Color(0xffDB3022);
 }
-ValueNotifier<bool> isDarkMode=ValueNotifier(false);
+
+ValueNotifier<bool> isDarkMode = ValueNotifier(false);

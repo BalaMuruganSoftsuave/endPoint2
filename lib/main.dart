@@ -1,7 +1,7 @@
-import 'package:endpoint2/BlocHelper/charter_cubit.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
+import 'bloc/charter_cubit.dart';
 import 'helper/app_color.dart';
 import 'helper/nav_helper.dart';
 import 'helper/nav_observer.dart';
@@ -14,7 +14,6 @@ class MyApp extends StatelessWidget {
   const MyApp({
     super.key,
   });
-
 
   // This widget is the root of your application.
   @override

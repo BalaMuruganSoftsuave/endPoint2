@@ -1,6 +1,8 @@
 import 'dart:collection';
+
 import 'package:endpoint2/screens/search_contract_screen.dart';
 import 'package:flutter/material.dart';
+
 import '../screens/add_charter_screen.dart';
 import 'nav_observer.dart';
 
@@ -19,7 +21,7 @@ Route<Object?>? getRoute(String? name, {LinkedHashMap? args}) {
           settings: RouteSettings(name: name));
     case addCharterScreen:
       return MaterialPageRoute(
-          builder: (context) =>  AddCharterScreen(),
+          builder: (context) => AddCharterScreen(),
           settings: RouteSettings(name: name));
   }
   return null;
